@@ -19,6 +19,13 @@ var logAnalyticsWorkspaceName = 'workspace-${resourceNameSuffix}'
 var applicationInsightsName = 'toywebsite'
 var storageAccountName = 'mystorage${resourceNameSuffix}'
 
+@description('The URL to the product review API.')
+param reviewApiUrl string
+
+@secure()
+@description('The API key to use when accessing the product review API.')
+param reviewApiKey string
+
 // Define the SKUs for each component based on the environment type.
 var environmentConfigurationMap = {
   Production: {
@@ -37,7 +44,7 @@ var environmentConfigurationMap = {
   Test: {
     appServicePlan: {
       sku: {
-        name: 'F1'
+        name: 'S1'
       }
     }
     storageAccount: {
@@ -69,6 +76,14 @@ resource appServiceApp 'Microsoft.Web/sites@2022-03-01' = {
         {
           name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
           value: applicationInsights.properties.ConnectionString
+        }
+        {
+          name: 'ReviewApiUrl'
+          value: reviewApiUrl
+        }
+        {
+          name: 'ReviewApiKey'
+          value: reviewApiKey
         }
       ]
     }
