@@ -12,19 +12,19 @@ param environmentType string
 @maxLength(13)
 param resourceNameSuffix string = uniqueString(resourceGroup().id)
 
-// Define the names for resources.
-var appServiceAppName = 'toy-website-${resourceNameSuffix}'
-var appServicePlanName = 'toy-website'
-var logAnalyticsWorkspaceName = 'workspace-${resourceNameSuffix}'
-var applicationInsightsName = 'toywebsite'
-var storageAccountName = 'mystorage${resourceNameSuffix}'
-
 @description('The URL to the product review API.')
 param reviewApiUrl string
 
 @secure()
 @description('The API key to use when accessing the product review API.')
 param reviewApiKey string
+
+// Define the names for resources.
+var appServiceAppName = 'toy-website-${resourceNameSuffix}'
+var appServicePlanName = 'toy-website'
+var logAnalyticsWorkspaceName = 'workspace-${resourceNameSuffix}'
+var applicationInsightsName = 'toywebsite'
+var storageAccountName = 'mystorage${resourceNameSuffix}'
 
 // Define the SKUs for each component based on the environment type.
 var environmentConfigurationMap = {
